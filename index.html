@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Candidate Ranking & Selection System</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            background-color: #b9a8d1;
+            /* light lavender */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2e1a47;
+            /* deep purple */
+            text-align: center;
+            background-color: #d6c8eb;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3b2064;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            background: #fff;
+            padding: 20px 40px;
+            margin: 20px auto;
+            width: 600px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            grid-row-gap: 15px;
+            grid-column-gap: 20px;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button,
+        #loadCandidates,
+        #topCandidate,
+        #loadSkills {
+            grid-column: 1 / span 2;
+            /* button spans across both columns */
+            justify-self: center;
+            /* center horizontally */
+            align-self: center;
+            /* center vertically */
+            width: auto;
+            /* shrink to fit text */
+            padding: 10px 20px;
+            background: #4b1d78;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #bda0e7;
+
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Candidate Ranking & Selection System</h1>
+
+    <div class="section">
+        <h2>Add Candidate</h2>
+        <form id="addCandidateForm">
+            <label>First Name:</label>
+            <input type="text" name="First_Name" required placeholder="Write Your First Name">
+
+            <label>Last Name:</label>
+            <input type="text" name="Last_Name" required placeholder="Write Your Last Name">
+
+            <label>Contact Info:</label>
+            <input type="number" name="Contact_Info" required placeholder="Phone Number" maxlength="10">
+
+            <label>Degree:</label>
+            <select name="Degree">
+                <option value="" selected>Select Degree</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="M.Tech">M.Tech</option>
+                <option value="BCA">BCA</option>
+                <option value="MCA">MCA</option>
+                <option value="BCOM">BCOM</option>
+                <option value="MCOM">MCOM</option>
+            </select>
+
+            <label>Grad Year:</label>
+            <input type="number" name="Grad_Year" required placeholder="Year Of Graduation">
+
+
+            <label>Experience (Years):</label>
+            <input type="number" name="Experience" required placeholder="Years Of Experience">
+
+            <label>Skills:</label>
+            <select name="Skill">
+                <option value="" selected>Select Skills</option>
+                <option value="Java">Java</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="Python">Python</option>
+                <option value="C#">C#</option>
+            </select>
+
+            <button type="submit">Add Candidate</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Update Candidate</h2>
+        <form id="updateCandidateForm">
+            <label>Candidate ID:</label>
+            <input type="number" name="Candidate_ID" required placeholder="Write Your Candidate ID">
+
+            <label>First Name:</label>
+            <input type="text" name="First_Name" required placeholder="Write Your First Name">
+
+            <label>Last Name:</label>
+            <input type="text" name="Last_Name" required placeholder="Write Your Last Name">
+
+            <label>Contact Info:</label>
+            <input type="number" name="Contact_Info" required placeholder="Phone Number" maxlength="10">
+
+            <label>Degree:</label>
+            <select>
+                <option value="Select Degree" selected>Select Degree</option>
+                <option value="Java">B.Tech</option>
+                <option value="Java">M.tech</option>
+                <option value="Java">BCa</option>
+                <option value="Java">MCA</option>
+                <option value="Java">BCOM</option>
+                <option value="Java">MCOM</option>
+            </select>
+
+            <label>Grad Year:</label>
+            <input type="number" name="Grad_Year" required placeholder="Year Of Graduation">
+
+
+            <label>Experience (Years):</label>
+            <input type="number" name="Experience" required placeholder="Years Of Experience">
+
+            <label>Skills:</label>
+            <select>
+                <option value="Select Skills" selected>Select Skills</option>
+                <option value="Java">Java</option>
+                <option value="Java">C</option>
+                <option value="Java">C++</option>
+                <option value="Java">Python</option>
+                <option value="Java">C#</option>
+            </select>
+
+            <button type="submit">Update Candidate</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Evaluate Candidate</h2>
+        <form id="evaluateForm">
+            <label>Candidate ID:</label>
+            <input type="number" name="Candidate_ID" required placeholder="Write Candidate ID">
+
+            <label>Evaluation Type: </label>
+            <select>
+                <option value="Type">Select Type</option>
+                <option value="Skills">Skills</option>
+                <option value="Experience">Experience</option>
+            </select>
+
+            <label>Score:</label>
+            <input type="number" name="Score" placeholder="0-100" required>
+
+            <button type="submit">Submit Evaluation</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>All Candidates</h2>
+        <button id="loadCandidates">Show All Candidates</button>
+        <table id="candidateTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Degree</th>
+                <th>Experience</th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Top Candidate</h2>
+        <button id="topCandidate">Show Top Candidate</button>
+        <table id="topTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Final Score</th>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <script>
+        function toJSON(form) {
+            let obj = {};
+            form.serializeArray().forEach(i => obj[i.name] = i.value);
+            return obj;
+        }
+
+        $("#addCandidateForm").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/add_candidate",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(toJSON($(this))),
+                success: res => alert(res.message)
+            });
+        });
+
+        $("#updateCandidateForm").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/update_candidate",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(toJSON($(this))),
+                success: res => alert(res.message)
+            });
+        });
+
+        $("#evaluateForm").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/evaluate_candidate",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(toJSON($(this))),
+                success: res => alert(res.message)
+            });
+        });
+
+        $("#loadCandidates").click(function () {
+            $.get("/all_candidates", function (data) {
+                $("#candidateTable tr:not(:first)").remove();
+                data.forEach(row => {
+                    $("#candidateTable").append(
+                        `<tr>
+                    <td>${row.Candidate_ID}</td>
+                    <td>${row.First_Name} ${row.Last_Name}</td>
+                    <td>${row.Contact_Info}</td>
+                    <td>${row.Degree}</td>
+                    <td>${row.Experience}</td>
+                </tr>`
+                    );
+                });
+            });
+        });
+
+        $("#topCandidate").click(function () {
+            $.get("/top_candidate", function (row) {
+                $("#topTable tr:not(:first)").remove();
+                if (row) {
+                    $("#topTable").append(
+                        `<tr>
+                    <td>${row.Candidate_ID}</td>
+                    <td>${row.First_Name} ${row.Last_Name}</td>
+                    <td>${row.Final_Score}</td>
+                 </tr>`
+                    );
+                }
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>
